@@ -1,23 +1,42 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+Реализуйте и экспортируйте по умолчанию функцию `buildHtml`, которая возвращает строковое представление `html`.
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+```
+import buildHtml from './solution';
 
-# nodejs-package
+const data = ['html', [
+  ['meta', [
+    ['title', 'hello, hexlet!'],
+  ]],
+  ['body', { class: 'container' }, [
+    ['h1', { class: 'header' }, 'html builder example'],
+    ['div', [
+      ['span', 'span text2'],
+      ['span', 'span text3'],
+    ]],
+  ]],
+]];
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+buildHtml(data);
 
-## Setup
-
-```sh
-$ make install
 ```
 
-## Run tests
-
-```sh
-$ make test
 ```
+<html>
+  <meta><title>hello, hexlet!</title></meta>
+  <body class="container">
+    <h1 class="header">html builder example</h1>
+    <div>
+      <span>span text2</span>
+      <span>span text3</span>
+    </div>
+  </body>
+</html>
+
+```
+
+### Подсказки
+
+-   Для объединения массива в строку, используйте метод `join(separator)`.
+-   Эту задачу можно решить практически без единой условной конструкции используя полиморфизм на основе объекта (ключ, значения).
+
+Решение учителя может повергнуть вас в шок. Оно не содержит ничего нового по сравнению с тем что вы проходили, но по максимуму использует пройденные идеи, функции высшего порядка, неизменяемость, полиморфизм. Потратьте время, разберитесь с ним.
