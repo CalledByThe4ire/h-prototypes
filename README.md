@@ -1,23 +1,41 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+Текущая версия `htmlBuilder` должна уметь работать с одиночными тегами. Список тегов, которые являются одиночными, находится в `singleTagsList`.
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Пример:
 
-# nodejs-package
+```
+// <br>
+['br'];
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+// <img src="/path">
+['img', { src: '/path' }];
 
-## Setup
-
-```sh
-$ make install
 ```
 
-## Run tests
+### solution.js
 
-```sh
-$ make test
+Реализуйте и экспортируйте функции `parse` и `render`.
+
+-   Функция `render` принимает на вход `ast` и возвращает строковое представление.
+-   Функция `parse` принимает на вход исходную структуру и возвращает представление в виде `ast`.
+
+```
+const data = ['html', [
+  ['meta', { id: 'uniq-key' }, [
+    ['title', 'hello, hexlet!'],
+  ]],
+  ['body', [
+    ['br'],
+  ]],
+]];
+
+const ast = parse(data);
+
+{ name: 'html', attributes: {}, body: '', children: [
+  { name: 'meta', attributes: { id: 'uniq-key' }, body: '', children: [
+    { name: 'title', attributes: {}, body: 'hello, hexlet!', children: [] },
+  ]},
+  { name: 'body', attributes: {}, body: '', children: [
+    { name: 'br', attributes: {}, body: '', children: [] },
+  ]},
+]}
 ```
