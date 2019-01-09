@@ -1,23 +1,37 @@
+import { identity } from 'lodash/fp';
+
 const singleTagsList = new Set(['hr', 'img', 'br']);
 
 // BEGIN (write your solution here)
-const buildAttrString = attrs =>
-  Object.keys(attrs)
-    .map(key => ` ${key}="${attrs[key]}"`)
+export const render = data => {
+  const { name, attributes, body, children } = data;
+  const attrsLine = Object.keys(attributes)
+    .map(key => ` ${key}="${attributes[key]}"`)
     .join('');
+  const content = children.length > 0 ? children.map(render).join('') : body;
+
+  if (singleTagsList.has(name)) {
+    return `<${name}${attrsLine}>`;
+  }
+
+  return `<${name}${attrsLine}>${content}</${name}>`;
+};
 
 const propertyActions = [
   {
     name: 'body',
-    check: arg => typeof arg === 'string'
+    check: arg => typeof arg === 'string',
+    process: identity
   },
   {
     name: 'children',
-    check: arg => arg instanceof Array
+    check: arg => arg instanceof Array,
+    process: (children, f) => children.map(f)
   },
   {
     name: 'attributes',
-    check: arg => arg instanceof Object
+    check: arg => arg instanceof Object,
+    process: identity
   }
 ];
 
@@ -32,31 +46,9 @@ export const parse = data => {
     body: '',
     children: []
   };
-  const rootTag = rest.reduce((acc, arg) => {
-    const { name } = getPropertyAction(arg);
-    return {
-      ...acc,
-      [name]: arg
-    };
+  return rest.reduce((acc, arg) => {
+    const { name, process } = getPropertyAction(arg);
+    return { ...acc, [name]: process(arg, parse) };
   }, root);
-
-  const { children } = rootTag;
-  if (!children) {
-    return rootTag;
-  }
-  return {
-    ...rootTag,
-    children: children.reduce((acc, val) => [...acc, parse(val)], [])
-  };
 };
-
-export const render = tag =>
-  [
-    `<${tag.name}${buildAttrString(tag.attributes)}>`,
-    `${
-      singleTagsList.has(tag.name)
-        ? ''
-        : `${tag.body}${tag.children.map(render).join('')}</${tag.name}>`
-    }`
-  ].join('');
 // END
