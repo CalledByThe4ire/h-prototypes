@@ -1,23 +1,19 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+### buildNode.js
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Реализуйте и экспортируйте функцию по умолчанию, задача которой, создавать объект подходящего типа. Типы: `SingleTag` и `PairedTag`. Список имен тегов, которые относятся к `SingleTag`: `hr`, `br`, `img`.
 
-# nodejs-package
+### PairedTag.js
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+Реализуйте тип PairedTag со следующим интерфейсом:
 
-## Setup
+-   Конструктор, который принимает на вход: `name`, `attributes`, `body`, `children`.
+-   Метод `toString`, который возвращает текстовое представление узла (html) на всю глубину.
 
-```sh
-$ make install
-```
+### SingleTag.js
 
-## Run tests
+Реализуйте тип SingleTag со следующим интерфейсом:
 
-```sh
-$ make test
-```
+-   Конструктор, который принимает на вход: `name`, `attributes`
+-   Метод `toString`, который возвращает текстовое представление узла (html) на всю глубину.
+
+Обратите внимание на то что у SingleTag нет `body` и `children`
