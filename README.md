@@ -1,23 +1,25 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+### magic.js
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Реализуйте и экспортируйте по умолчанию функцию, которая работает следующим образом:
 
-# nodejs-package
+-   Принимает на вход любое число аргументов и возвращает функцию, которая, в свою очередь, принимает на вход любое количество аргументов и так до бесконечности (привет, рекурсия ;)).
+-   Результат вызова этой функции при проверке на равенство должен быть равен сумме всех аргументов всех подфункций.
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+```
+magic() == 0; // true
+magic(5, 2, -8) == -1; // true
+magic(1, 2)(3, 4, 5)(6)(7, 10) == 38; // true
+magic(4, 8, 1, -1, -8)(3)(-3)(7, 2) == 13; // true
 
-## Setup
-
-```sh
-$ make install
 ```
 
-## Run tests
+#### Подсказки
 
-```sh
-$ make test
+Объекты в js по умолчанию имеют метод `valueOf`, который вызывается автоматически в тех местах, где требуется преобразование к числовому значению (контекст арифметических операций и операций нестрогого сравнения). В ситуации выше, во время сравнения, `js` вызовет `valueOf` для нашей функции. Этим можно воспользоваться для того, чтобы возвращать сумму через `valueOf`.
+
+```
+const obj = {}
+obj + 3; // '[object Object]3'
+obj.valueOf = () => 3;
+obj + 7; // 10
 ```
