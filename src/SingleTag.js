@@ -1,9 +1,12 @@
 // BEGIN (write your solution here)
-// import Node from './Node';
+import Node from './Node';
 
-// export default class extends Node {
-//   toString() {
-//     return `<${this.name}${this.getAttributesAsLine()}>`;
-//   }
-// }
+function toString() {
+  return `<${this.name}${this.getAttributesAsLine()}>`;
+}
+
+export default function SingleTag(name, attributes = {}) {
+  Node.apply(this, [name, attributes]);
+  this.toString = toString;
+}
 // END
