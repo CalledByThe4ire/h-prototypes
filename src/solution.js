@@ -23,17 +23,17 @@ const getPropertyAction = arg =>
   propertyActions.find(({ check }) => check(arg));
 
 const parse = data => {
-  const [first, ...rest] = data;
-  const root = {
-    name: first,
-    attributes: {},
-    body: '',
-    children: []
-  };
-  const args = rest.reduce((acc, arg) => {
-    const { name, process } = getPropertyAction(arg);
-    return { ...acc, [name]: process(arg, parse) };
-  }, root);
+  const args = data.slice(1).reduce(
+    (acc, arg) => {
+      const { name, process } = getPropertyAction(arg);
+      return { ...acc, [name]: process(arg, parse) };
+    },
+    {
+      name: data[0],
+      body: '',
+      children: []
+    }
+  );
   return buildNode(args.name, args.attributes, args.body, args.children);
 };
 
