@@ -11,6 +11,8 @@ export default function PairedTag(
   this.children = children;
 }
 
+PairedTag.prototype = Object.create(Node.prototype);
+
 PairedTag.prototype.toString = function toString() {
   const value =
     this.children.length > 0

@@ -1,4 +1,4 @@
-import { identity } from 'lodash';
+import { identity } from 'lodash/fp';
 import buildNode from './buildNode';
 
 const propertyActions = [
